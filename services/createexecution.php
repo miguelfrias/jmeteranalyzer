@@ -83,17 +83,16 @@ ENGINE = InnoDB;";
 
     if (mysqli_query($enlace, $query)) {
         $response['code'] 			= "000";
-        $mensaje['message'] 		= $testname;
+        $response['message'] 		= "Test created successfully.";
         $_SESSION['execution']		= $testname;
         $_SESSION['executionID']	= $testid;
     } else {
         $response['code'] = "002";
-        $mensaje['message'] = "Error in the query CREATE: ".mysqli_error($enlace)."<br>".$query;
+        $response['message'] = "Error in the query CREATE: ".mysqli_error($enlace)."<br>".$query;
         mysqli_close($enlace);
         die(json_encode($response));
     }
 
-    $response['message'] = $mensaje;
     echo json_encode($response);
 
     mysqli_close($enlace);
